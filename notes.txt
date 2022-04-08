@@ -1,0 +1,377 @@
+Project 3: Array Sorting and Merging
+Spring 2022 CPSC 335 - Algorithm Engineering Instructor: Dr. Sampson Akwafuo
+
+Algorithm 1: Finding Target Substrings
+Assume that you are given two arrays of items. The first array is a single concatenation of all cities in California. The second array contains names of some real or imaginary cities, that are present in in the first array.
+Sample:
+Input: Array_A = [ “hemetoaklandrialtofullertonmarcolongchinofresnovallejoclovissimithousand”] Array_B = [ 'clovis', 'vallejo', 'rialto', 'marco']
+Output: Output_order =[ 12, 27, 47, 54]
+Output_array =[ 'rialto', 'marco', 'vallejo', 'clovis']
+
+Your output should be an array containing starting indices of the target words in array one. In the example above, rialto is the first word, and can be found at index array_A[12]. All words are in small letters.
+To Do:
+a. Develop a complete and clear pseudocode for an algorithm to solve this problem. Your algorithm should return the indices of the target words (contents of Array_B) in ascending order of their appearances in Array_A. It should also print the words, according to the resulting of appearance.
+b. Mathematically analyze your pseudocode and state the efficiency class.
+c. Implement your algorithm in either Python or C++.
+d. Using the given sample files (in3AS.txt), print resulting lists for the 3 input arrays.
+Include them in your PDF report.
+
+given inputs:
+['sanoaklandrialtofullertonmarcolongchinocoronamodestoclovissimithousand']
+['oakland', 'modesto', 'clovis', 'corona']
+
+['polmonafremontrialtofullertonmarcolongfresnochinoclovissimisalinas']
+['fullerton', 'chino', 'fremont', 'fresno']
+
+array 3a = ['torranceoaklandrialtomarcooxnardchinofresnoirvineclovissimiorange']
+array 3b = ['oxnard', 'irvine', 'orange', 'marco']
+
+
+Part 1: 
+assumptions: 
+1. first array is a single concatenation
+2. second array words are present in the first array
+
+input:
+array 1: single concatenation of all cities in California; 
+one string
+array 2: names of some real or imaginary cities, that are present in in the first array
+multiple strings in the input
+
+output:
+order: list of indices of target words in ascending order
+words: target words in order of appearance
+
+def find_targets(array_1, array_2):
+
+    returns (order, targets)
+
+0. 
+getting arrays from file?
+import sys
+python3 .py file.txt
+def main()
+    if len(sys.argv) = 1
+        nothing passed: 
+            do the arrays in the code
+    else: # looks at the first file sys.argv[1] for the arrays to use
+
+1. instantiate variables
+array1_length = len(array_1) 
+    last index is length - 1
+
+["abcde"][0,4] length 5
+["abc"] [0,2] length 3
+    check up to index 2 or first array array1_length - word_length!!
+
+
+HOW TO STORE???
+dictionary 
+key:value
+word:index
+result = {}
+
+2. loop through array_2:
+for word in array_2:
+    word_length = len(word)
+    loop through array_1
+        for index, character in enumerate(array_1)
+            check the amount of chracters left in array
+            if index <= array1_length - word_length:
+                current_array1_word = array_1[0][index:word_length]
+                if current_array1_word == word:
+                    result.update({word:index})
+                    break -> start the next word
+-> should end with a result dictionary with all the words and indices
+
+3. sort the dictionary by the index values
+
+4. move input from dictionary to lists
+order, words = zip(*result)
+return order, words
+
+first try at getting from file:
+def main():
+    array1 = []
+    array2 = []
+    if len(sys.argv) == 2:
+        file = open(sys.argv[1], 'r') 
+        # array1 = file.readline()
+        array1.append(re.sub(r"[^a-zA-Z0-9 ]", "", file.readline()))
+        array2 = file.readline()
+        file.close
+    else: 
+        array1 = ['sanoaklandrialtofullertonmarcolongchinocoronamodestoclovissimithousand']
+        array2 = ['oakland', 'modesto', 'clovis', 'corona']
+    
+    print(array1)
+    print(len(array1))
+    print(type(array1))
+    print(array2)
+    print(type(array2))
+        
+
+
+if __name__ == "__main__":
+    main()
+
+NO NUMPY???
+array1 = np.genfromtxt(sys.argv[1], dtype=str, delimiter=",")
+
+working part 1 with print statements:
+________________________________________
+
+def find_targets(array1, array2):
+    """
+        Function that takes two lists and finds the indices of the values of
+        array2 in array1's string. A list with the indices in ascending 
+        order of their appearance in array1 and a list of the words in
+        the order they appear are returned.
+
+        input:
+        array1  - list of length 1 with one string at array1[0]
+        array2  - list of multiple strings found in array1
+
+        return:
+        order   - list of indices in ascending order of their appearance in 
+                array1
+        targets - list of the words in the order they appear
+    """
+    # get the length of the string in array1
+    length1 = len(array1[0])
+    print("Length of array1:", length1)
+    
+    # initialize dictionary to store the results
+    result = {}
+
+    for word in array2:
+        word_length = len(word)
+        for index, character in enumerate(array1[0]):
+            if index <= length1 - word_length:
+                print(length1 - index)
+                current_array1_word = array1[0][index:index + word_length]
+                print("THE CURRENT CHAR:", character)
+                if current_array1_word == word:
+                    result.update({word:index})
+                    break
+    
+    # sort dictionary by index values
+    print("Before sort: ")
+    print(result)
+    result = dict(sorted(result.items(), key=lambda item: item[1]))
+    print("After sort: ")
+    print(result)
+    order, target = zip(*result.items())
+    return order, target
+
+
+def main():
+    array1 = []
+    array2 = []
+    if len(sys.argv) == 2:
+        file = open(sys.argv[1], 'r') 
+        # array1 = file.readline()
+        # array1.append(re.sub(r"[^a-zA-Z0-9 ]", "", file.readline()))
+        array1.append(file.readline().rstrip('\n'))
+        # array2 = file.readline()
+        array2 = file.readline().split(", ")
+        file.close
+    else: 
+        array1 = ['sanoaklandrialtofullertonmarcolongchinocoronamodestoclovissimithousand']
+        array2 = ['oakland', 'modesto', 'clovis', 'corona']
+    """
+    print(array1)
+    print(len(array1))
+    print(type(array1))
+    print(array2)
+    print(type(array2))
+    """
+    print(find_targets(array1, array2))
+    
+        
+
+
+if __name__ == "__main__":
+    main()
+
+
+________________________________________
+
+
+________________________________________ ________________________________________
+Using enumerate::
+def find_targets(array1, array2):
+    """
+        Function that takes two lists and finds the indices of the values of
+        array2 in array1's string. A list with the indices in ascending 
+        order of their appearance in array1 and a list of the words in
+        the order they appear are returned.
+
+        input:
+        array1  - list of length 1 with one string at array1[0]
+        array2  - list of multiple strings found in array1
+
+        return:
+        order   - list of indices in ascending order of their appearance in 
+                array1
+        targets - list of the words in the order they appear
+    """
+    # get the length of the string in array1
+    length1 = len(array1[0])
+    
+    # initialize dictionary to store the results
+    result = {}
+
+    # total nested for-loop complexity = O(n^2):
+    # iterate through every target word in the second array
+    # linear time efficiency O(n)
+    for word in array2:
+        # iterate from 0 to the length of array1's string
+        # linear time efficiency O(n)
+        for index, _ in enumerate(array1[0]):
+            # avoid going out of bounds
+            if index <= length1 - len(word):
+                # current string = [index, index + wordlength]
+                # check if the current string matches target word 
+                if array1[0][index:index + len(word)] == word:
+                    # add word:index to dictionary
+                    result.update({word:index})
+                    break
+    
+    # sort dictionary by index values to list in ascending order
+    # python's sort function has O(nlogn) efficiency
+    result = dict(sorted(result.items(), key=lambda item: item[1]))
+
+    # use python zip function to transform dictionary into 2 lists
+    # O(n) time complexity
+    target, order = zip(*result.items())
+    # returns tuple(list of indices, list of words)
+    return order, target
+
+
+def main():
+    array1 = []
+    array2 = []
+    # check for command line input file
+    if len(sys.argv) == 2:
+        file = open(sys.argv[1], 'r') 
+        array1.append(file.readline().rstrip('\n'))
+        array2 = file.readline().split(", ")
+        file.close
+        print(find_targets(array1, array2))
+
+    # if there is no command line argument, the script goes through the three
+    # given input arrays
+    else: 
+        
+        # 3 input arrays from in3A-1
+        array1a = ['sanoaklandrialtofullertonmarcolongchinocoronamodestoclovissimithousand']
+        array1b = ['oakland', 'modesto', 'clovis', 'corona']
+
+        array2a = ['polmonafremontrialtofullertonmarcolongfresnochinoclovissimisalinas']
+        array2b = ['fullerton', 'chino', 'fremont', 'fresno']
+
+        array3a = ['torranceoaklandrialtomarcooxnardchinofresnoirvineclovissimiorange']
+        array3b = ['oxnard', 'irvine', 'orange', 'marco']
+
+        print(find_targets(array1a, array1b))
+        print(find_targets(array2a, array2b))
+        print(find_targets(array3a, array3b))
+        
+
+if __name__ == "__main__":
+    main()
+
+
+________________________________________ ________________________________________
+changed enumerate to range
+removed the length1 variable
+
+    # initialize dictionary to store the results
+    result = {}
+
+    # total nested for-loop complexity = O(n^2):
+    # iterate through every target word in the second array
+    # linear time efficiency O(n)
+    for word in array2:
+        # iterate from 0 to the length of the array1 string
+        # linear time efficiency O(n)
+        for index in range(len(array1[0])):
+            # avoid going out of bounds
+            if index <= len(array1[0]) - len(word):
+                # current string = [index, index + wordlength]
+                # check if the current string matches target word 
+                if array1[0][index:index + len(word)] == word:
+                    # add word:index to dictionary
+                    result.update({word:index})
+                    break
+
+________________________________________ ________________________________________
+changed inner for loop indexing to remove if statements
+removed use of zip function and returned using keys() and values() dictionary
+function without creating another variable
+
+def find_targets(array1, array2):
+    """
+        Function that takes two lists and finds the indices of the values of
+        array2 in array1's string. A list with the indices in ascending 
+        order of their appearance in array1 and a list of the words in
+        the order they appear are returned.
+
+        input:
+        array1  - list of length 1 with one string at array1[0]
+        array2  - list of multiple strings found in array1
+
+        return:
+        order   - list of indices in ascending order of their appearance in 
+                array1
+        targets - list of the words in the order they appear
+    """
+    # initialize dictionary to store the results
+    result = {}
+
+    # total nested for-loop complexity = O(n^2):
+    # iterate through every target word in the second array
+    # O(n) linear time efficiency
+    for word in array2:
+        # iterate from 0 to the len(array1) - len(word) + 1
+        # (ensures that the word can be formed)
+        # O(n) linear time efficiency
+        for index in range(len(array1[0]) - len(word) + 1):
+            # current string = [index, index + wordlength]
+            # check if the current string matches target word 
+            if array1[0][index:index + len(word)] == word:
+                # add word:index to dictionary
+                result.update({word:index})
+                break
+    
+    # sort dictionary by index values to list in ascending order
+    # python's sort function has O(nlogn) efficiency
+    result = dict(sorted(result.items(), key=lambda item: item[1]))
+
+    # returns tuple(list of indices, list of words)
+    # O(n + n) = O(2n) = O(n) linear time efficiency 
+    return list(result.keys()), list(result.values())
+
+________________________________________ ________________________________________
+pseudocode:
+"""
+def find_targets(array1, array2):
+    result = {}
+    for word in array2:
+        for index, _ in enumerate(array1[0]):
+            if index <= length1 - len(word):
+                if array1[0][index:index + len(word)] == word:
+                    result.update({word:index})
+                    break
+"""
+def find_targets(array1, array2):
+    result = {}
+    for word in array2:
+        for index in range(len(array1[0]) - len(word) + 1):
+            if array1[0][index:index + len(word)] == word:
+                result.update({word:index})
+                break
+    <sort result dictionary by increasing values>
+    return result.keys(), result.values()
+________________________________________ ________________________________________
