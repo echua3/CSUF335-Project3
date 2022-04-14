@@ -51,7 +51,7 @@ def find_targets(array1, array2):
 
     # returns tuple(list of indices, list of words)
     # O(n + n) = O(2n) = O(n) linear time efficiency 
-    return list(result.keys()), list(result.values())
+    return list(result.values()), list(result.keys())
 
 
 def main():
@@ -64,7 +64,8 @@ def main():
         array1.append(file.readline().rstrip('\n'))
         array2 = file.readline().split(", ")
         file.close
-        print(find_targets(array1, array2))
+        a1, b1 = find_targets(array1, array2)
+        print("{a}\n{b}".format(a = a1, b = b1))
 
     # no command line argument
     # the script initializes the three given input arrays
@@ -80,9 +81,12 @@ def main():
         array3a = ['torranceoaklandrialtomarcooxnardchinofresnoirvineclovissimiorange']
         array3b = ['oxnard', 'irvine', 'orange', 'marco']
 
-        print(find_targets(array1a, array1b))
-        print(find_targets(array2a, array2b))
-        print(find_targets(array3a, array3b))
+        a1, b1 = find_targets(array1a, array1b)
+        a2, b2 = find_targets(array2a, array2b)
+        a3, b3 = find_targets(array3a, array3b)
+        print("{a}\n{b}".format(a = a1, b = b1))
+        print("{a}\n{b}".format(a = a2, b = b2))
+        print("{a}\n{b}".format(a = a3, b = b3))
         
 
 if __name__ == "__main__":
