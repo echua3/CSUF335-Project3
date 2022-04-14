@@ -617,3 +617,14 @@ parent is always smaller than the child
 2. min heapify
 3. swap
 4. remove min
+
+1. iterate through every value in the list and put into min heap
+- track size of heap -- array length?
+
+2. remove from heap and store into list
+- save root element H[1]
+- swap last element with root
+- swap root with children if its greater
+
+HEAPIFY:
+
