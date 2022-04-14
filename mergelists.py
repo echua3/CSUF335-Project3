@@ -22,25 +22,26 @@ def mergesort(all_lists):
         return:
         sorted_list - list of sorted values
     """
-    sorted_list = []
     # check for valid input
     if len(all_lists) == 0:
         return all_lists
     elif len(all_lists) == 1:
         return all_lists[0]
-     
+
+    sorted_list = []    # initialize sorted list
     # iterates while all_lists is not empty
     while all_lists:
         # removes first list in all_lists if it is empty
         if len(all_lists[0]) < 1:
             all_lists.pop(0)
         elif len(all_lists) == 1:
+            # appends the rest of the last list and exits while loop
             sorted_list.extend(all_lists[0])
             break
         else:
             # initialize list that contains smallest value
             smallest = all_lists[0] 
-            for l in all_lists:
+            for l in all_lists[1:]:
                 if (len(l) > 0) and l[0] < smallest[0]:
                     smallest = l
 
@@ -54,7 +55,7 @@ def mergesort(all_lists):
     return sorted_list
 
 def main():
-    # check for command line input file
+    # check for command line input file argument
     if len(sys.argv) == 2:
         all_lists = []
         with open(sys.argv[1], 'r') as file:
