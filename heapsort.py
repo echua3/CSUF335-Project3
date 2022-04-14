@@ -1,4 +1,4 @@
-# mergelists_heap.py
+# heapsort.py
 # Epiphany Chua
 # echua@csu.fullerton.edu
 # Spring 2022 CPSC 335 (2)
@@ -105,7 +105,7 @@ def main():
                 all_lists.append(list(map(int, current_list)))
         print("inputted array:", all_lists)
         file.close
-        print(mergesort(all_lists))
+        print(min_heap_merge(all_lists))
          
     else: 
         array_1  =[[2, 5, 9, 21],
