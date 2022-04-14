@@ -8,13 +8,14 @@
 # Project 3: Array Sorting and Merging
 # Algorithm 2: Merging Techniques
 
+from cgitb import small
 import sys
 
 def mergesort(all_lists):
     """
         Function that takes a list of sorted-lists and returns
         a sorted list containing all the elements. 
-        Important: This function assumes all lists are sorted.
+        Important! This function assumes all lists are sorted.
 
         input:
         all_lists - list of sorted lists
@@ -23,42 +24,78 @@ def mergesort(all_lists):
         sorted_list - list of sorted values
     """
     sorted_list = []
-    # iterates until all_lists is empty
+    # check for valid input
+    print("all lists length:", len(all_lists))
+    if len(all_lists) == 0:
+        return all_lists
+    elif len(all_lists) == 1:
+        return all_lists[0]
+     
+    # iterates while all_lists is not empty
     while all_lists:
-        # initialize index of list, contains smallest value in the entire list
-        smallest_i = 0 
-        for i in range(1, len(all_lists)):
-            if all_lists[i][0] < all_lists[smallest_i][0]:
-                smallest_i = i
-        # remove the smallest value from all_lists and append to list
-        smallest = all_lists[smallest_i].pop(0)
-        sorted_list.append(smallest)
-        # removes empty list from all_lists
-        if (len(all_lists[smallest_i]) == 0):
-            all_lists.pop(smallest_i)
-        
+        # removes first list in all_lists if it is empty
+        if len(all_lists[0]) < 1:
+            all_lists.pop(0)
+        elif len(all_lists) == 1:
+            sorted_list.extend(all_lists[0])
+            break
+        else:
+            # initialize list that contains smallest value
+            smallest = all_lists[0] 
+            for l in all_lists:
+                print("AT L: ", l)
+                if (len(l) > 1) and l[0] < smallest[0]:
+                    smallest = l
+
+            # remove the smallest value from all_lists and append to list
+            print("appending from:", smallest)
+            sorted_list.append(smallest[0])
+            smallest.pop(0)
+            
+            # removes empty list from all_lists
+            if (len(smallest) == 0):
+                all_lists.remove(smallest)
     return sorted_list
 
 def main():
     # check for command line input file
-    if len(sys.argv) == 1:
-        array1 = []
+    if len(sys.argv) == 2:
+        all_lists = []
         with open(sys.argv[1], 'r') as file:
             for line in file:
-                array1.append(line)
-        print(array1)
+                current_list = line.rstrip('\n').split(", ")
+                all_lists.append(list(map(int, current_list)))
+        print("inputted array:", all_lists)
         file.close
+        print("all_lists: ", mergesort(all_lists))
+         
     else: 
         all_lists = [[0], [1,2], [4]]
-        # print("all_lists:", all_lists)
-        # all_lists[0].pop(0)
-        # print("all_lists:", all_lists)
-        # if(len(all_lists[0]) == 0):
-        #     all_lists.pop(0)
-        # print("all_lists:", all_lists)
         all_lists1 = [[0], [1,2], [4], [1, 2, 3]]
+        all_lists2 = [[5], [4,3], [4], [1, 2, 3]]
+        # array_1  =[[2, 5, 9, 21],
+	    #    [-1, 0, 2],
+	    #    [-10, 81, 121],
+	    #    [4, 6, 12, 20, 150] ]
+        # array_2  =[ [10, 17, 18, 21, 29],
+	    #    [-3, 0, 3, 7, 8, 11],
+	    #    [81, 88, 121, 131],
+	    #    [9, 11, 12, 19, 29] ]
+        # array_3  = [ [-4, -2, 0, 2, 7],
+	    #    [4, 6, 12, 14],
+	    #    [10, 15, 25],
+	    #    [5, 6, 10, 20, 24] ]
         print("all_lists: ", mergesort(all_lists))
         print("all_lists1: ", mergesort(all_lists1))
+        print("all_lists1: ", mergesort(all_lists2))
+        print("sort [[1],[]]:", mergesort([[1],[1, 2]]))
+        print("sort [[]]:", mergesort([[]]))
+        print("sort [[], []]:", mergesort([[], []]))
+        print("sort [[], [], [3]]:", mergesort([[], [], [3]]))
+        print("sort [[], [], [3], [], [1, 9]]:", mergesort([[], [], [3], [], [1, 9]]))
+        # print(mergesort(array_1))
+        # print(mergesort(array_2))
+        # print(mergesort(array_3))
 
 if __name__ == "__main__":
     main()
