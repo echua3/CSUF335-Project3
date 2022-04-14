@@ -19,7 +19,7 @@ The txt document must be in the format depicted below.
 str2str1str3etc
 str1, str2, str3, etc
 ```
-running `python3 text.txt`
+running `python3 substrings.py test.txt`
 ```
 [0, 4, 8, 12]
 ['str2', 'str1', 'str3', 'etc']
@@ -48,3 +48,34 @@ will return
 ['marco', 'oxnard', 'irvine', 'orange']
 ```
 ### Algorithm 2: Merging Techniques
+The script **mergelists.py** accepts a txt document as input and returns and 
+prints the given list of lists as a 1 dimensional sorted list.
+The txt document must be in the format depicted below.
+```
+# test2.txt
+0, 1, 3
+2, 9, 15, 17
+-1, 2
+```
+running `python3 mergelists.py test2.txt`
+```
+[-1, 0, 1, 2, 2, 3, 9, 15, 17]
+```
+If no document is passed, running `python3 mergelists.py` will print the 
+resulting lists from the given input arrays found in in3B.docx. These sample
+inputs can also be separately tested using the files in3B-1.txt, in3B-2.txt,
+and in3B-3.txt.
+```
+python3 substrings.py in3A-1.txt
+python3 substrings.py in3A-2.txt
+python3 substrings.py in3A-3.txt
+```
+
+will return
+```
+[-10, -1, 0, 2, 2, 4, 5, 6, 9, 12, 20, 21, 81, 121, 150]
+
+[-3, 0, 3, 7, 8, 9, 10, 11, 11, 12, 17, 18, 19, 21, 29, 29, 81, 88, 121, 131]
+
+[-4, -2, 0, 2, 4, 5, 6, 6, 7, 10, 10, 12, 14, 15, 20, 24, 25]
+```
