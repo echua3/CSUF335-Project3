@@ -5,9 +5,13 @@
 
 ### Epiphany Chua echua@csu.fullerton.edu
 
+[Github Repo link](https://github.com/echua3/CSUF335-Project3/tree/main "CPSC 335 Project 3 git Repo")
+
 Includes **Algorithm 1: Finding Target Substrings** and **Algorithm 2: Merging Techniques**
 ### Algorithm 1: Finding Target Substrings
-The script **substrings.py** accepts a txt document as input. 
+The script **substrings.py** accepts a txt document as input and prints the
+indices of the target words ascending order of their appearances and print the
+words, according to the resulting of appearance. 
 
 The txt document must be in the format depicted below.
 ```
@@ -32,7 +36,7 @@ python3 substrings.py in3A-2.txt
 python3 substrings.py in3A-3.txt
 ```
 
-This will return
+will return
 ```
 [3, 39, 45, 52]
 ['oakland', 'corona', 'modesto', 'clovis']

@@ -64,6 +64,7 @@ def main():
         array1.append(file.readline().rstrip('\n'))
         array2 = file.readline().split(", ")
         file.close
+        # execute find_targets algorithm
         a1, b1 = find_targets(array1, array2)
         print("{a}\n{b}".format(a = a1, b = b1))
 
