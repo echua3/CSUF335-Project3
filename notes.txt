@@ -375,3 +375,34 @@ def find_targets(array1, array2):
     <sort result dictionary by increasing values>
     return result.keys(), result.values()
 ________________________________________ ________________________________________
+
+Algorithm 2: Merging Techniques
+input: all_lists - list of lists
+output: sorted_list - sorted list
+
+1. Merge Sort:
+Given that the first element of each array is the smallest integer, you can build a list of smallest items. 
+Pick the smallest out of the list of all smallest items. This will become the first item of the merged sorted 
+list. You may then proceed to check all items in parent array.
+
+0. initialize sorted list
+sorted_list = []
+
+while all_lists:
+smallest = all_lists[0][0]
+smallest_index = 0
+
+1. find smallest value in all_lists
+- iterate through range(length(all_lists))
+if all_lists[index][0] < smallest
+smallest = all_lists[index][0]
+- change to not use smallest variable!! 
+smallest_index = 0
+
+return the index of the the list with the smallest value
+2. pop from list
+smallest = all_lists[index].pop(0)
+3. add to end of sorted list 
+sorted_list.append(smallest)
+
+
