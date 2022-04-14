@@ -7,6 +7,7 @@
 
 # Project 3: Array Sorting and Merging
 # Algorithm 2: Merging Techniques
+
 import sys
 
 def left(k):
@@ -76,13 +77,9 @@ def min_heap_merge(all_lists):
     # input all the values into an array starting at index 1
     min_heap = [None]
     for l in all_lists:
-        print("l:", l)
         min_heap.extend(l)
     
-    print("BEFORE MIN HEAP: ", min_heap)
-    
     create_min_heap(min_heap)               # create min heap structure
-    print("AFTER MIN HEAP: ", min_heap)
 
     sorted_list = []                        # initialize sorted list
     while len(min_heap) > 1:
@@ -103,7 +100,7 @@ def main():
             for line in file:
                 current_list = line.rstrip('\n').split(", ")
                 all_lists.append(list(map(int, current_list)))
-        print("inputted array:", all_lists)
+        print("Input:", all_lists)
         file.close
         print(min_heap_merge(all_lists))
          
@@ -120,9 +117,9 @@ def main():
 	       [4, 6, 12, 14],
 	       [10, 15, 25],
 	       [5, 6, 10, 20, 24] ]
-        print("Sorted array1: ", min_heap_merge(array_1))
-        print("Sorted array2: ", min_heap_merge(array_2))
-        print("Sorted array3: ", min_heap_merge(array_3))
+        print("Sorted array1:", min_heap_merge(array_1))
+        print("Sorted array2:", min_heap_merge(array_2))
+        print("Sorted array3:", min_heap_merge(array_3))
 
 if __name__ == "__main__":
     main()
