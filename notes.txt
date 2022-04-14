@@ -375,7 +375,35 @@ def find_targets(array1, array2):
     <sort result dictionary by increasing values>
     return result.keys(), result.values()
 ________________________________________ ________________________________________
+latex math for time complexity:
+         line number & cost & frequency \\ 
+         \hline
+         2 & $c_1$ & 1 \\ 
+         3 & $c_2$ & $m + 1$ \\ 
+         4 & $c_3$ & $m(n+1)$ \\ 
+         6 & $c_4$ & $m\times n$ \\ 
+         7 & $c_5$ & $m\times n$ \\ 
+         8 & $c_6$ & $m\times n$\\
+         9 & $nlogn$ & 1 \\ 
+         11 & $c_7$ & 2m \\ 
+         \hline
+        \end{tabular}
+        \end{center}
+        
+        $T(n) = c_1 + [c_2(m+1)][c_3(n+1)(c_4 + c_5 + c_6)] + c_7(n log n) + c_8(2m)$ \\
+        $T(n) = c_1 + [mc_2+c_2][(nc_3+c_3)(c_4 + c_5 + c_6)] + c_7(n log n) + 2c_8m$ \\
+        $T(n) = c_1 + [mc_2+c_2][(nc_3c_4 + nc_3c_5 + nc_3c_6 + c_3c_4 + c_3c_5 + c_3c_6)] + c_7(n log n) + 2c_8m$ \\
+        $T(n) = c_1 + [mc_2+c_2][(n + 1)c_3c_4 + (n+1)c_3c_5 + (n+1)c_3c_6] + c_7(n log n) + 2c_8m$ \\
+        $T(n) = c_1 + [mc_2+c_2](n + 1)[c_3c_4 + c_3c_5 + c_3c_6] + c_7(n log n) + 2c_8m$
+        removing some constants:\\
+        $T(n) = mc_2(n) + c_7(n log n) + 2c_8m$\\\\
+        assuming $mn > nlogn$:\\
+        $T(n) = mn$\\
+        $\rightarrow O(mn)$\\
+        Thus, the time complexity is based on the length of the string in array1 and the length of array2.
 
+
+________________________________________ ________________________________________
 Algorithm 2: Merging Techniques
 input: all_lists - list of lists
 output: sorted_list - sorted list
@@ -405,4 +433,103 @@ smallest = all_lists[index].pop(0)
 3. add to end of sorted list 
 sorted_list.append(smallest)
 
+testing pop function:
+        print("all_lists:", all_lists)
+        all_lists[0].pop(0)
+        print("all_lists:", all_lists)
+        if(len(all_lists[0]) == 0):
+            all_lists.pop(0)
+        print("all_lists:", all_lists)
 
+
+________________________________________ ________________________________________
+MERGE SORT ATTEMPT
+DID NOT WORK FOR EMPTY LIST INPUTS:
+def mergesort(all_lists):
+    """
+        Function that takes a list of sorted-lists and returns
+        a sorted list containing all the elements. 
+        Important! This function assumes all lists are sorted.
+
+        input:
+        all_lists - list of sorted lists
+
+        return:
+        sorted_list - list of sorted values
+    """
+    sorted_list = []
+    # check for valid input
+    print("all lists length:", len(all_lists))
+    if len(all_lists) == 0:
+        return all_lists
+    elif len(all_lists) == 1:
+        return all_lists[0]
+     
+    # iterates until all_lists is empty
+    while all_lists:
+        if len(all_lists[0]) < 1:
+            all_lists.pop(0)
+        else:
+            # initialize index of list, contains smallest value in the entire list
+            smallest_i = 0 
+            for i in range(1, len(all_lists)):
+                # remove current list if it is empty
+                if (len(all_lists[i]) == 0):
+                    all_lists.pop(i) 
+                elif len(all_lists[smallest_i]) > 0 and all_lists[i][0] < all_lists[smallest_i][0]:
+                    smallest_i = i
+            # remove the smallest value from all_lists and append to list
+            smallest = all_lists[smallest_i].pop(0)
+            sorted_list.append(smallest)
+            # removes empty list from all_lists
+            if (len(all_lists[smallest_i]) == 0):
+                all_lists.pop(smallest_i)
+        
+    return sorted_list
+    ________________________________________ ________________________________________
+    MERGE SORT THAT WORKS WITH EMPTY INPUT, DOES NOT USE INDEX:
+    def mergesort(all_lists):
+    """
+        Function that takes a list of sorted-lists and returns
+        a sorted list containing all the elements. 
+        Important! This function assumes all lists are sorted.
+
+        input:
+        all_lists - list of sorted lists
+
+        return:
+        sorted_list - list of sorted values
+    """
+    sorted_list = []
+    # check for valid input
+    print("all lists length:", len(all_lists))
+    if len(all_lists) == 0:
+        return all_lists
+    elif len(all_lists) == 1:
+        return all_lists[0]
+     
+    # iterates while all_lists is not empty
+    while all_lists:
+        # removes first list in all_lists if it is empty
+        if len(all_lists[0]) < 1:
+            all_lists.pop(0)
+        elif len(all_lists) == 1:
+            sorted_list.extend(all_lists[0])
+            break
+        else:
+            # initialize list that contains smallest value
+            smallest = all_lists[0] 
+            for l in all_lists:
+                print("AT L: ", l)
+                if (len(l) > 1) and l[0] < smallest[0]:
+                    smallest = l
+
+            # remove the smallest value from all_lists and append to list
+            print("appending from:", smallest)
+            sorted_list.append(smallest[0])
+            smallest.pop(0)
+            
+            # removes empty list from all_lists
+            if (len(smallest) == 0):
+                all_lists.remove(smallest)
+    return sorted_list
