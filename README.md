@@ -47,3 +47,4 @@ will return
 [21, 26, 43, 59]
 ['marco', 'oxnard', 'irvine', 'orange']
 ```
+### Algorithm 2: Merging Techniques
