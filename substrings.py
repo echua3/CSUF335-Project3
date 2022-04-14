@@ -56,7 +56,7 @@ def find_targets(array1, array2):
 
 def main():
 
-    # check for command line input file
+    # check for command line input files
     if len(sys.argv) == 2:
         array1 = []
         array2 = []
