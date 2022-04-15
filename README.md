@@ -106,7 +106,9 @@ will return
 
 ### Project 3
 The script **project3.py** accepts two txt documents as input. The first file
-uses **substrings.p** to print the indices of the target words ascending order of 
-their appearances and prints the words, according to the resulting of appearance from the first file
-returns and prints the given list of lists as a 1 dimensional sorted list.
-The txt document must be in the format depicted below.
+uses **substrings.py** to print the indices of the target words ascending order
+of their appearances and prints the words, according to the resulting of 
+appearance. The second text file uses **mergelists.py** to print the given list
+of lists as a 1 dimensional sorted list.
+
+file1.txt and file2.txt must match the descriptions described earlier.
