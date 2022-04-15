@@ -80,8 +80,7 @@ will return
 [-4, -2, 0, 2, 4, 5, 6, 6, 7, 10, 10, 12, 14, 15, 20, 24, 25]
 ```
 
-Similarily, 
-running `python3 heapsort.py test2.txt`
+Similarly, running `python3 heapsort.py test2.txt`
 ```
 [-1, 0, 1, 2, 2, 3, 9, 15, 17]
 ```
