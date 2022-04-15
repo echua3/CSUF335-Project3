@@ -117,9 +117,9 @@ def main():
 	       [4, 6, 12, 14],
 	       [10, 15, 25],
 	       [5, 6, 10, 20, 24] ]
-        print("Sorted array1:", min_heap_merge(array_1))
-        print("Sorted array2:", min_heap_merge(array_2))
-        print("Sorted array3:", min_heap_merge(array_3))
+        print(min_heap_merge(array_1))
+        print(min_heap_merge(array_2))
+        print(min_heap_merge(array_3))
 
 if __name__ == "__main__":
     main()
